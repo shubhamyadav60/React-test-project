@@ -1,0 +1,18 @@
+.paginationClass .ag-paging-panel {
+  background-color: #f0f4f8;
+  color: #32383e;
+  padding: 10px;
+}
+
+.paginationClass .ag-paging-button {
+  background-color: #fbfcfe;
+  color: #32383e;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.paginationClass .ag-paging-number {
+  font-weight: bold;
+  color: #32383e;
+}
