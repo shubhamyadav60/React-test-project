@@ -42,7 +42,7 @@ const DecryptComponent = ({ encryptedText }) => {
       <p>
         <strong>Decrypted Text:</strong> {decryptedText}
       </p>
-    </div>
+    </div> 
   );
 };
 

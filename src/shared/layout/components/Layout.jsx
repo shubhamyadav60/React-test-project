@@ -22,11 +22,10 @@ export default function Layout({children}) {
       >
         <header
           className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-          style={{ marginLeft: expanded ? "16rem" : "4rem" }}
         >
           <Header />
         </header>
-        <main className="pt-20 p-6" style={{paddingLeft:"16rem"}}>
+        <main className="p-6" >
          {children}
         </main>
       </div>

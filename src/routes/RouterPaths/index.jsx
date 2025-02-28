@@ -3,4 +3,5 @@ export const RoutePaths = {
   LayoutPath: '/',
   MultiStepPath : '/multistep',
   EncryptPath : "encrypt",
+  ApiResponsePath : "/apiresponse",
 };

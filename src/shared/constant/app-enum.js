@@ -10,5 +10,6 @@ export const APP_ENUMS = {
     MultiStep : "MultiStep",
     SETTINGS: "Settings",
     BLOCK: "block",
-    HIDDEN: "hidden"
+    HIDDEN: "hidden",
+    APIRESPONSE : "ApiResponse"
 }

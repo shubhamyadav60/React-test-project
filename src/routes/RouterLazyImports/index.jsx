@@ -4,6 +4,7 @@ const Layout = lazy(() => import("../../shared/layout/components/Layout"));
  const MultiStep = lazy(() => import("../../features/RegisterForm/RegisterForm"));
  const DashboardContainer  = lazy(() => import("../../features/dashboard/container/Dashboard.container"));
  const Encrypt  = lazy(() => import("../../features/EncryptDecryptComponent"));
+ const ApiResponse = lazy (()=> import('../../features/dashboard/ApiResponse'))
 
 export {
   Login,
@@ -11,4 +12,5 @@ export {
   MultiStep,
   DashboardContainer,
   Encrypt,
+  ApiResponse
 };

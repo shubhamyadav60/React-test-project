@@ -25,6 +25,9 @@ const RegisterSteps = ({stepHighlight,setStepHighlight,step, setStep}) => {
           <li>
             <Link to="#step3" onClick={()=>{setStep(3)}} className={`${step ===3 ?'sidebar-active':""}`}>Step 3</Link>
           </li>
+          <li>
+            <Link to="#step4" onClick={()=>{setStep(4)}} className={`${step ===4 ?'sidebar-active':""}`}>Step 4</Link>
+          </li>
         </ul>
       </nav>
     </div>

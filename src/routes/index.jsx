@@ -1,13 +1,14 @@
 import { RoutePaths } from "./RouterPaths";
 
 import {
+  ApiResponse,
   DashboardContainer,
   Encrypt,
   Login,
   MultiStep,
 } from "./RouterLazyImports";
 
-const { LayoutPath, loginPath , MultiStepPath,EncryptPath} = RoutePaths;
+const { LayoutPath, loginPath , MultiStepPath,EncryptPath,ApiResponsePath} = RoutePaths;
 
 const publicRoutes = [
   {
@@ -28,6 +29,11 @@ const privateRoutes = [
   {
     path : EncryptPath,
     component : Encrypt
+  }
+  ,
+  {
+    path : ApiResponsePath,
+    component : ApiResponse
   }
 ];
 

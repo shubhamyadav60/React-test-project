@@ -6,6 +6,7 @@ import { APP_MESSAGES } from "../../../shared/constant/app-messages";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTE } from "../../../shared/constant/app-routes";
 import { APP_ENUMS } from "../../../shared/constant/app-enum";
+import DashboardIcon from "../../../assets/images/dashboard.svg";
 
 
 export default function Sidebar({ user, expanded, setExpanded }) {
@@ -62,6 +63,11 @@ export default function Sidebar({ user, expanded, setExpanded }) {
                   className={`flex items-center w-full p-3 rounded-md text-[#32383E] font-semibold 
                                  ${active === APP_ENUMS.DASHBOARD ? "bg-[#DDE7EE]" : ""}`}
                 >
+                  <img
+                    src={DashboardIcon}
+                    alt="Dashboard"
+                    className="h-6 w-6 text-gray-300"
+                  />
                   <span
                     className={`ml-3 transition-all ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
                   >
@@ -101,13 +107,30 @@ export default function Sidebar({ user, expanded, setExpanded }) {
                   </span>
                 </button>
               </li>
+
+              <li>
+                <button
+                  onClick={() => {
+                    setActive(APP_ENUMS.APIRESPONSE)
+                    navigate('/apiresponse')
+                  }}
+                  className={`flex items-center w-full p-3 rounded-md text-[#32383E] font-semibold 
+                                  ${active === APP_ENUMS.APIRESPONSE ? "bg-[#DDE7EE]" : ""}`}
+                >
+                  <span
+                    className={`ml-3 transition-all ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
+                  >
+                    API Response
+                  </span>
+                </button>
+              </li>
              
             </ul>
           </div>
           <div>
            
-            <div className="flex items-center border-t border-gray-200 space-x-4 p-3 mt-6">
-              <div className="w-8 h-8 bg-white border border-[#CDD7E1] rounded-full flex items-center justify-center text-sm font-medium text-[#32383E]">
+            <div className="flex items-center border-t border-gray-200  p-3 mt-6">
+              <div className="w-8 mr-[5px] p-4 h-8 bg-white border border-[#CDD7E1] rounded-full flex items-center justify-center text-sm font-medium text-[#32383E]">
                 SY
               </div>
               <div
@@ -124,7 +147,7 @@ export default function Sidebar({ user, expanded, setExpanded }) {
                 <img
                   src={LogoutIcon}
                   alt="logout"
-                  className={`w-6 h-6 ml-12 ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
+                  className={`w-6 h-6 ml-8 ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
                   title="Logout"
                 />
               </button>

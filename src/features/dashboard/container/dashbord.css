@@ -66,4 +66,23 @@
     font-weight: bold;
     color: #1f2937;
   }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .button-container {
+    flex-wrap: wrap !important;
+    gap: 2rem !important;
+  }
+  
+  #myGrid {
+    flex: 1;
+  }
+  
+  #myChart {
+    flex: 2;
+    min-height: 530px;
+  }
   
