@@ -96,9 +96,9 @@ const CRUD = () => {
     <div className="crud-container">
       <AddItemModal handleCreateItem={handleCreate} handleInputChange={handleInputChange} newItem={newItem} setNewItem={setNewItem} isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      <SmartTable data={items} columns={columns} onUpdate={handleUpdate} onDelete={handleDelete} setShowAlert={setShowAlert} setDeleteId={setDeleteId}  />;
+      <SmartTable data={items} columns={columns} onUpdate={handleUpdate} onDelete={handleDelete} setShowAlert={setShowAlert} setDeleteId={setDeleteId}  />
 
-      {showAlert === true ? (
+      {showAlert ? (
         <>
           <AlertBox
             title={"Are You Sure ?"}

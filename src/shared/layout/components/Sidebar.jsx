@@ -1,155 +1,132 @@
 import { LuArrowLeftFromLine, LuArrowRightFromLine } from "react-icons/lu";
+import { FiLogOut } from "react-icons/fi";
 import { useState } from "react";
-import LogoutIcon from "../../../assets/images/logout.svg";
+import DashboardIcon from "../../../assets/images/dashboard.svg";
 import toast from "react-hot-toast";
 import { APP_MESSAGES } from "../../../shared/constant/app-messages";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTE } from "../../../shared/constant/app-routes";
 import { APP_ENUMS } from "../../../shared/constant/app-enum";
-import DashboardIcon from "../../../assets/images/dashboard.svg";
 
-
-export default function Sidebar({ user, expanded, setExpanded }) {
+export default function Sidebar({ expanded, setExpanded }) {
   const [active, setActive] = useState(APP_ENUMS.DASHBOARD);
-  const userDetails = localStorage.getItem("userDetails")
-  const getUserData = JSON.parse(userDetails)
+  const userDetails = JSON.parse(localStorage.getItem("userDetails")) || {};
   const navigate = useNavigate();
+
   const logoutMessage = () => {
     localStorage.clear();
-    
     toast.success(APP_MESSAGES.SUCCESS_WHILE_LOGOUT);
-    
     navigate(APP_ROUTE.LOGIN);
-    
   };
- 
+
+  const menuItems = [
+    {
+      key: APP_ENUMS.DASHBOARD,
+      label: "Dashboard",
+      icon: DashboardIcon,
+      route: "/"
+    },
+    {
+      key: APP_ENUMS.Encrypt,
+      label: "Encrypt & Decrypt",
+      icon: null,
+      route: "/Encrypt"
+    },
+    {
+      key: APP_ENUMS.MultiStep,
+      label: "MultiStep",
+      icon: null,
+      route: "/multistep"
+    },
+    {
+      key: APP_ENUMS.APIRESPONSE,
+      label: "API Response",
+      icon: null,
+      route: "/apiresponse"
+    }
+  ];
+
   return (
     <div className="relative">
       {expanded && (
         <div
-          className="fixed inset-0 z-10 bg-black opacity-50 sm:hidden"
+          className="fixed inset-0 z-10 bg-black/50 sm:hidden"
           onClick={() => setExpanded(false)}
         ></div>
       )}
       <aside
-        className={`
-          fixed left-0 top-0 h-screen bg-white shadow-lg transition-all z-[999]
-          ${expanded ? "w-64" : "w-16"}
-          sm:${expanded ? "w-64" : "w-20"}
-        `}
+        className={`fixed left-0 top-0 h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] shadow-lg transition-all duration-300 z-50
+        ${expanded ? "w-64" : "w-20"}`}
       >
-        <div className="flex h-full flex-col border-r bg-white">
-          <div className="flex items-start gap-[3.75rem] justify-between p-4 pt-10 relative z-[1000]">
-           
+        <div className="flex h-full flex-col">
+          {/* Header with Toggle */}
+          <div className="flex items-center justify-between p-4">
+            <h2
+              className={`text-lg font-semibold text-gray-800 transition-all ${
+                expanded ? "opacity-100" : "opacity-0 w-0 overflow-hidden"
+              }`}
+            >
+              Dashboard
+            </h2>
             <button
-              onClick={() => setExpanded((curr) => !curr)}
-              className={`rounded-full bg-[#FFFFFF] p-2 hover:bg-[#F0F4F8] border border-[#F0F4F8] transition-all z-[1000]
-                 ${!expanded ? "ml-5 max-md:ml-4" : ""}`}
+              onClick={() => setExpanded((prev) => !prev)}
+              className="p-2 bg-white border border-gray-200 rounded-full shadow hover:bg-gray-100 transition"
             >
               {expanded ? (
-                <LuArrowLeftFromLine className="h-6 w-6 text-[#636B74]" />
+                <LuArrowLeftFromLine className="w-5 h-5 text-gray-600" />
               ) : (
-                <LuArrowRightFromLine className="h-6 w-6 text-[#636B74]" />
+                <LuArrowRightFromLine className="w-5 h-5 text-gray-600" />
               )}
             </button>
           </div>
-          <div className="flex-1 overflow-y-auto">
-            <ul className="flex-1 p-2" style={{padding:"0.8rem"}}>
-              <li>
-                <button
-                  onClick={() => {
-                    navigate('/')
-                    setActive(APP_ENUMS.DASHBOARD)}}
-                  className={`flex items-center w-full p-3 rounded-md text-[#32383E] font-semibold 
-                                 ${active === APP_ENUMS.DASHBOARD ? "bg-[#DDE7EE]" : ""}`}
-                >
-                  <img
-                    src={DashboardIcon}
-                    alt="Dashboard"
-                    className="h-6 w-6 text-gray-300"
-                  />
-                  <span
-                    className={`ml-3 transition-all ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
-                  >
-                    Dashboard
-                  </span>
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() =>{ setActive(APP_ENUMS.Encrypt)
-                    navigate('/Encrypt')}
-                  }
-                  className={`flex items-center w-full p-3 rounded-md text-[#32383E] font-semibold 
-                                  ${active === APP_ENUMS.Encrypt ? "bg-[#DDE7EE]" : ""}`}
-                >
-                  <span
-                    className={`ml-3 transition-all ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
-                  >
-                    Encrypt & Decrypt
-                  </span>
-                </button>
-              </li>
 
-              <li>
+          {/* Menu Items */}
+          <ul className="flex-1 space-y-2 p-4">
+            {menuItems.map(({ key, label, icon, route }) => (
+              <li key={key}>
                 <button
                   onClick={() => {
-                    setActive(APP_ENUMS.MultiStep)
-                    navigate('/multistep')
+                    setActive(key);
+                    navigate(route);
                   }}
-                  className={`flex items-center w-full p-3 rounded-md text-[#32383E] font-semibold 
-                                  ${active === APP_ENUMS.MultiStep ? "bg-[#DDE7EE]" : ""}`}
+                  className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg font-medium text-gray-700 hover:bg-gray-100 transition ${
+                    active === key ? "bg-blue-100 text-blue-600 font-semibold" : ""
+                  }`}
                 >
+                  {icon ? (
+                    <img src={icon} alt={label} className="w-6 h-6" />
+                  ) : (
+                    <span className="w-6 h-6 flex items-center justify-center bg-gray-200 text-gray-600 font-bold rounded-md">
+                      {label.charAt(0)}
+                    </span>
+                  )}
                   <span
-                    className={`ml-3 transition-all ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
+                    className={`transition-all ${expanded ? "block" : "hidden"}`}
                   >
-                    MultiStep
+                    {label}
                   </span>
                 </button>
               </li>
+            ))}
+          </ul>
 
-              <li>
-                <button
-                  onClick={() => {
-                    setActive(APP_ENUMS.APIRESPONSE)
-                    navigate('/apiresponse')
-                  }}
-                  className={`flex items-center w-full p-3 rounded-md text-[#32383E] font-semibold 
-                                  ${active === APP_ENUMS.APIRESPONSE ? "bg-[#DDE7EE]" : ""}`}
-                >
-                  <span
-                    className={`ml-3 transition-all ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
-                  >
-                    API Response
-                  </span>
-                </button>
-              </li>
-             
-            </ul>
-          </div>
-          <div>
-           
-            <div className="flex items-center border-t border-gray-200  p-3 mt-6">
-              <div className="w-8 mr-[5px] p-4 h-8 bg-white border border-[#CDD7E1] rounded-full flex items-center justify-center text-sm font-medium text-[#32383E]">
-                SY
+          {/* Footer (User + Logout) */}
+          <div className="border-t border-gray-200 p-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 flex items-center justify-center bg-blue-500 text-white rounded-full">
+                <img src={userDetails?.profilePic || "https://i.pinimg.com/236x/37/17/be/3717beaf7a1960ab5d5625523cb4604b.jpg"} alt="User" className="w-full h-full object-cover rounded-full" />
               </div>
-              <div
-                className={` ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
-              >
-                <p className="text-sm font-normal">
-                 { getUserData?.email}
+              <div className={`flex-1 transition-all ${expanded ? "block" : "hidden"}`}>
+                <p className="text-sm font-medium text-gray-700">
+                  {userDetails?.email || "User"}
                 </p>
               </div>
               <button
                 onClick={logoutMessage}
-                className="hover:opacity-80"
+                className="p-2 rounded-full hover:bg-gray-100 transition"
+                title="Logout"
               >
-                <img
-                  src={LogoutIcon}
-                  alt="logout"
-                  className={`w-6 h-6 ml-8 ${expanded ? APP_ENUMS.BLOCK : APP_ENUMS.HIDDEN}`}
-                  title="Logout"
-                />
+                <FiLogOut className="w-5 h-5 text-gray-600" />
               </button>
             </div>
           </div>

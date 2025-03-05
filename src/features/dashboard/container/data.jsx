@@ -19,24 +19,4 @@ function generateData() {
     ];
 }
 
-const trafficData = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  datasets: [
-    {
-      label: "Organic",
-      data: [1200, 1500, 1100, 1800, 1700, 2000], // Organic traffic numbers
-      borderColor: "#0D9488", // Teal color
-      backgroundColor: "rgba(13, 148, 136, 0.2)", // Light Teal
-      fill: true,
-    },
-    {
-      label: "Paid",
-      data: [800, 900, 700, 1100, 1300, 1400], // Paid traffic numbers
-      borderColor: "#9333EA", // Purple color
-      backgroundColor: "rgba(147, 51, 234, 0.2)", // Light Purple
-      fill: true,
-    },
-  ],
-};
-
 export default getData;

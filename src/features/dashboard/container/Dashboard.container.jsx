@@ -7,7 +7,7 @@ import RevenueTrafficChart from './RevenueTrafficChart';
 export default function DashboardContainer() {
   return (
     <div className="dashboard-container mt-[2.3rem]">
-    <main className="h-full overflow-y-auto">
+    <main className=" ">
             <div className="container  mx-auto grid">
               <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Dashboard</h2>
               {/* CTA */}
@@ -62,13 +62,17 @@ export default function DashboardContainer() {
                 {/* Add other cards here */}
               </div>
               {/* Charts */}
+              <div className=''>
               <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">Charts</h2>
               <GridExample/>
+              </div>
+              <div className='mt-20'>
               <RevenueTrafficChart/>
-             
+              </div>
             </div>
+            <CRUD/>
           </main>
-    <CRUD/>
+    
   </div>
   );
 }

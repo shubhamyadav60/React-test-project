@@ -5,10 +5,7 @@ import React, {
   useMemo,
   useRef,
   useState,
-  useEffect,
-  StrictMode,
 } from "react";
-import { createRoot } from "react-dom/client";
 import { AgGridReact } from "ag-grid-react";
 import '../../../App.css'
 import getData from "./data";
@@ -17,7 +14,6 @@ import {
   ClientSideRowModelModule,
   ModuleRegistry,
   ValidationModule,
-  createGrid,
 } from "ag-grid-community";
 import {
   ColumnMenuModule,
@@ -34,14 +30,13 @@ ModuleRegistry.registerModules([
   ValidationModule /* Development Only */,
 ]);
 
-let chartRef;
-
 const GridExample = () => {
+  const chartRef = useRef();
   const gridRef = useRef();
   const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
   const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
 
-  const [columnDefs, setColumnDefs] = useState([
+  const [columnDefs] = useState([
     {
       field: "period",
       chartDataType: "category",
@@ -80,13 +75,7 @@ const GridExample = () => {
   
 
   const onFirstDataRendered = useCallback((params) => {
-    chartRef = params.api.createRangeChart({
-      chartContainer: document.querySelector("#myChart"),
-      cellRange: {
-        columns: ["period", "recurring", "individual"],
-      },
-      chartType: "groupedColumn",
-    });
+    // Your chart click logic here
   }, []);
 
   const updateChart = useCallback(
@@ -97,7 +86,6 @@ const GridExample = () => {
         chartType: chartType,
       });
     },
-    [chartRef],
   );
 
   return (
